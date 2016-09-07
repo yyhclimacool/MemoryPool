@@ -21,7 +21,29 @@ public:
         freeSlots_ = nullptr;
     }
 
+    MemoryPool(const MemoryPool &pool) = delete;
+
+    MemoryPool(MemoryPool &&pool) noexcept{
+        currentBlock_ = pool.currentBlock_;
+        pool.currentBlock_ = nullptr;
+        currentSlot_ = pool.currentSlot_;
+        lastSlot_ = pool.lastSlot_;
+        freeSlots_ = pool.freeSlots_;
+    }
+
     ~MemoryPool() noexcept;
+
+    MemoryPool& operator=(const MemoryPool &pool) = delete;
+
+    MemoryPool& operator=(MemoryPool &&pool) noexcept{
+        if(this != &pool){
+            std::swap(currentBlock_, pool.currentBlock_);
+            currentSlot_ = pool.currentSlot_;
+            lastSlot_ = pool.lastSlot_;
+            freeSlots_ = pool.freeSlots_;
+        }
+        return *this;
+    }
 
     pointer allocate(size_t n = 1, const T *hint = nullptr);
 
