@@ -8,7 +8,7 @@
 
 #define ELEMS 10000000
 
-#define REPS 10
+#define REPS 100
 
 int main(){
     clock_t start;

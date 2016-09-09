@@ -1,3 +1,6 @@
+#ifndef STACK_ALLOC_H
+#define STACK_ALLOC_H
+
 #include <memory>
 
 template <typename T>
@@ -52,3 +55,5 @@ T pop(){
     return result;
 }
 };
+
+#endif // STACK_ALLOC_H
